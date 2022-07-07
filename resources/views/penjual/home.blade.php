@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Halaman Penjual | Jual Ikan</title>
+  <title>Halaman Penjual | Dashboard</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -66,9 +66,9 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="/admin" class="brand-link">
+    <a href="/penjual" class="brand-link">
       <img src="{{asset('assets/admin/dist/img/logo.png')}}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Penjual</span>
+      <span class="brand-text font-weight-light">Pasar Online Ikan</span>
     </a>
 
     <!-- Sidebar -->
@@ -79,7 +79,7 @@
           <img src="{{asset('assets/admin/dist/img/profiladmin.png')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Halo Penjual !</a>
+          <a href="/penjual/profile" class="d-block">Halo {{ Auth::user()->name }}</a>
         </div>
       </div>
 
@@ -105,33 +105,44 @@
             <a href="/penjual/ikan" class="nav-link">
             <i class="fas fa-solid fa-fish nav-icon"></i>
               <p>
-                Data Ikan
+                Data Stok Ikan
               </p>
             </a>
           </li>
           <!-- / Data Ikan -->
 
-          <!-- Pesan -->
+          <!-- Data Pemasukan -->
           <li class="nav-item">
-            <a href="/penjual/pesan" class="nav-link">
-            <i class="fas fa-solid fa-comment nav-icon"></i>
-              <p>
-                Data Pesan
-              </p>
-            </a>
-          </li>
-          <!-- / Data pesan -->
-
-          <!-- Data Penjualan -->
-          <li class="nav-item">
-            <a href="/penjual/penjualan" class="nav-link">
+            <a href="/penjual/pemasukan" class="nav-link">
             <i class="fas fa-solid fa-credit-card nav-icon"></i>
               <p>
-                Data Penjualan
+                Data Pemasukan
               </p>
             </a>
           </li>
-          <!-- / Data User -->
+          <!-- / Data Pemasukan -->
+
+          <!-- Data Pengeluaran -->
+          <li class="nav-item">
+            <a href="/penjual/pengeluaran" class="nav-link">
+            <i class="fas fa-solid fa-credit-card nav-icon"></i>
+              <p>
+                Data Pengeluaran
+              </p>
+            </a>
+          </li>
+          <!-- / Data Pengeluaran -->
+
+          <!-- Data Masukan -->
+            <li class="nav-item">
+            <a href="/penjual/masukan" class="nav-link">
+            <i class="fas fa-solid fa-credit-card nav-icon"></i>
+            <p>
+                Saran Dan Masukan
+            </p>
+            </a>
+        </li>
+        <!-- / Data Masukan -->
 
         </ul>
       </nav>
@@ -171,7 +182,7 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3></h3>
+                <h3>{{ $stokikan }}</h3>
                 <p>Stok Ikan</p>
               </div>
               <div class="icon">
@@ -186,7 +197,7 @@
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>2000</h3>
+                <h3>{{ $jumlahtransaksi }}</h3>
                 <p>Jumlah Transaksi</p>
               </div>
               <div class="icon">
@@ -202,7 +213,7 @@
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>5000</h3>
+                <h3>{{ $pemasukan }}</h3>
                 <p>Pemasukan</p>
               </div>
               <div class="icon">
@@ -218,7 +229,7 @@
             <!-- small box -->
             <div class="small-box bg-primary">
               <div class="inner">
-                <h3>20000</h3>
+                <h3>{{ $pengeluaran }}</h3>
                 <p>Pengeluaran</p>
               </div>
               <div class="icon">
@@ -234,29 +245,13 @@
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>3000</h3>
+                <h3>{{ $sisakas }}</h3>
                 <p>Sisa Kas</p>
               </div>
               <div class="icon">
                   <i class="fas fa-solid fa-credit-card"></i>
                 </div>
                 <a href="#" class="small-box-footer"></a>
-            </div>
-          </div>
-          <!-- ./col -->
-
-          <!-- ./col -->
-          <div class="col-lg-3 col-6">
-            <!-- small box -->
-            <div class="small-box bg-danger">
-              <div class="inner">
-                <h3></h3>
-                <p>Pesan</p>
-              </div>
-              <div class="icon">
-                  <i class="fas fa-solid fa-comment nav-icon"></i>
-                </div>
-              <a href="/penjual/pesan" class="small-box-footer">Lebih Rinci <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->

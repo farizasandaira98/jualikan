@@ -13,9 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('halaman.utama');
+Route::get('/', [App\Http\Controllers\IndexController::class,'index'])->name('index');
+Route::get('/listikan', [App\Http\Controllers\IndexController::class,'listikan'])->name('listikan');
+Route::get('/kontak', [App\Http\Controllers\IndexController::class,'kontak'])->name('kontak');
+Route::get('/about', [App\Http\Controllers\IndexController::class,'about'])->name('about');
+Route::get('/masukan', [App\Http\Controllers\IndexController::class,'masukan'])->name('masukan');
+Route::post('/storepemasukan', [App\Http\Controllers\MasukController::class,'storepemasukan'])->name('storepemasukan')->middleware('auth');;
 
 Auth::routes();
 
@@ -29,28 +32,28 @@ Route::prefix('penjual')->group(function() {
     Route::get('/register', [App\Http\Controllers\Auth\PenjualAuthController::class, 'showFormRegister'])->name('penjual.register');
     Route::post('/register', [App\Http\Controllers\Auth\PenjualAuthController::class, 'register'])->name('penjual.register.submit');
 
-    Route::get('/ikan', 'IkanController@index');
-    Route::get('/ikan/tambah', 'IkanController@tambah');
-    Route::post('/ikan/store', 'IkanController@store');
-    Route::get('/ikan/edit/{id}', 'IkanController@edit');
-    Route::post('/ikan/update/{id}', 'IkanController@update');
-    Route::get('/ikan/hapus/{id}', 'IkanController@destroy');
-    Route::get('/ikan/cari', 'IkanController@search');
-   }) ;
+    Route::get('/ikan', [App\Http\Controllers\StokIkanController::class, 'index'])->name('stokikan.index');
+    Route::get('/ikan/tambah', [App\Http\Controllers\StokIkanController::class, 'create'])->name('stokikan.create');
+    Route::post('/ikan/store', [App\Http\Controllers\StokIkanController::class, 'store'])->name('stokikan.store');
+    Route::get('/ikan/edit/{id}', [App\Http\Controllers\StokIkanController::class, 'edit'])->name('stokikan.edit');
+    Route::post('/ikan/update/{id}', [App\Http\Controllers\StokIkanController::class, 'update'])->name('stokikan.store');
+    Route::get('/ikan/hapus/{id}', [App\Http\Controllers\StokIkanController::class, 'destroy'])->name('stokikan.destroy');
+    Route::get('/ikan/cari', [App\Http\Controllers\StokIkanController::class, 'search'])->name('stokikan.search');
 
-   Route::prefix('pembeli')->group(function() {
-    Route::get('/login', [Auth\PembeliAuthController::class, '@getLogin'])->name('pembeli.login');
-    Route::post('/login', 'Auth\PembeliAuthController@postLogin');
-    Route::get('/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
-    Route::get('/', 'Auth\AdminController@index')->name('admin.dashboard');
-    Route::get('/register', 'Auth\AdminLoginController@showFormRegister')->name('admin.register');
-    Route::post('/register', 'Auth\AdminLoginController@register')->name('admin.register.submit');
+    Route::get('/pemasukan', [App\Http\Controllers\PemasukanController::class, 'index'])->name('pemasukan.index');
+    Route::get('/pemasukan/hapus/{id}', [App\Http\Controllers\PemasukanController::class, 'destroy'])->name('pemasukan.destroy');
+    Route::get('/pemasukan/cari', [App\Http\Controllers\PemasukanController::class, 'search'])->name('pemasukan.search');
+    Route::get('/pemasukan/cetak', [App\Http\Controllers\PemasukanController::class, 'cetak'])->name('pemasukan.cetak');
 
-    Route::get('/ikan', 'IkanController@index');
-    Route::get('/ikan/tambah', 'IkanController@tambah');
-    Route::post('/ikan/store', 'IkanController@store');
-    Route::get('/ikan/edit/{id}', 'IkanController@edit');
-    Route::post('/ikan/update/{id}', 'IkanController@update');
-    Route::get('/ikan/hapus/{id}', 'IkanController@destroy');
-    Route::get('/ikan/cari', 'IkanController@search');
+    Route::get('/pengeluaran', [App\Http\Controllers\PengeluaranController::class, 'index'])->name('pengeluaran.index');
+    Route::get('/pengeluaran/tambah', [App\Http\Controllers\PengeluaranController::class, 'create'])->name('pengeluaran.create');
+    Route::post('/pengeluaran/store', [App\Http\Controllers\PengeluaranController::class, 'store'])->name('pengeluaran.store');
+    Route::get('/pengeluaran/edit/{id}', [App\Http\Controllers\PengeluaranController::class, 'edit'])->name('pengeluaran.edit');
+    Route::post('/pengeluaran/update/{id}', [App\Http\Controllers\PengeluaranController::class, 'update'])->name('pengeluaran.store');
+    Route::get('/pengeluaran/hapus/{id}', [App\Http\Controllers\PengeluaranController::class, 'destroy'])->name('pengeluaran.destroy');
+    Route::get('/pengeluaran/cari', [App\Http\Controllers\PengeluaranController::class, 'search'])->name('pengeluaran.search');
+    Route::get('/pengeluaran/cetak', [App\Http\Controllers\PengeluaranController::class, 'cetak'])->name('pengeluaran.cetak');
+
+    Route::get('/masukan', [App\Http\Controllers\PemasukanController::class, 'saran'])->name('saran.index');
+    Route::get('/masukan/hapus/{id}', [App\Http\Controllers\PemasukanController::class, 'deletesaran'])->name('saran.destroy');
    }) ;
